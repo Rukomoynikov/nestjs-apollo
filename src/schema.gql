@@ -1,0 +1,58 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Article {
+  id: Int!
+  title: String!
+  description: String!
+  body: String!
+  published: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  articles: [Article!]!
+  article(id: Int!): Article!
+}
+
+type Mutation {
+  createArticle(createArticleInput: CreateArticleInput!): Article!
+  updateArticle(updateArticleInput: UpdateArticleInput!): Article!
+  removeArticle(id: Int!): Article!
+}
+
+input CreateArticleInput {
+  """Example field (placeholder)"""
+  title: String!
+
+  """Example field (placeholder)"""
+  description: String!
+
+  """Example field (placeholder)"""
+  body: String!
+
+  """Example field (placeholder)"""
+  published: String! = "false"
+}
+
+input UpdateArticleInput {
+  """Example field (placeholder)"""
+  title: String
+
+  """Example field (placeholder)"""
+  description: String
+
+  """Example field (placeholder)"""
+  body: String
+
+  """Example field (placeholder)"""
+  published: String = "false"
+  id: Int!
+}
