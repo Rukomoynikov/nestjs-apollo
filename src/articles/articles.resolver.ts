@@ -26,12 +26,22 @@ export class ArticlesResolver {
   }
 
   @Mutation(() => Article)
-  updateArticle(@Args('updateArticleInput') updateArticleInput: UpdateArticleInput) {
-    return this.articlesService.update(updateArticleInput.id, updateArticleInput);
+  updateArticle(
+    @Args('updateArticleInput') updateArticleInput: UpdateArticleInput,
+  ) {
+    return this.articlesService.update(
+      updateArticleInput.id,
+      updateArticleInput,
+    );
   }
 
   @Mutation(() => Article)
   removeArticle(@Args('id', { type: () => Int }) id: number) {
     return this.articlesService.remove(id);
+  }
+
+  @Query(() => [Article], {name: 'publishedArticles'})
+  findAllPublished() {
+    return this.articlesService.findAllPublished();
   }
 }

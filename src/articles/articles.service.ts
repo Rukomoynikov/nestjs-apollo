@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateArticleInput } from './dto/create-article.input';
 import { UpdateArticleInput } from './dto/update-article.input';
-import { PrismaService } from "src/prisma/prisma.service";
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class ArticlesService {
@@ -25,5 +25,9 @@ export class ArticlesService {
 
   remove(id: number) {
     return `This action removes a #${id} article`;
+  }
+
+  findAllPublished() {
+    return this.prisma.article.findMany({ where: { published: true } });
   }
 }
