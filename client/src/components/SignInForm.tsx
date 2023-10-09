@@ -2,17 +2,17 @@ import { gql } from "../__generated__";
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
 
-export const SignUpForm = () => {
-  const SIGN_UP = gql(/* GraphQL */ `
-      mutation SignUp($email: String!, $password: String!) {
-          createUser(data: {email: $email, password: $password}) {
+export const SignInForm = () => {
+  const SIGN_IN = gql(/* GraphQL */ `
+      mutation SignIn($email: String!, $password: String!) {
+          signIn(data: {email: $email, password: $password}) {
               id
               email
           }
       }
   `);
 
-  const [mutateFunction, { data, loading, error }] = useMutation(SIGN_UP);
+  const [mutateFunction, { data, loading, error }] = useMutation(SIGN_IN);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,8 +23,7 @@ export const SignUpForm = () => {
   console.log(data)
 
   return <>
-    <h2>Sign up</h2>
-
+    <h2>Log in</h2>
     <form
       onSubmit={e => {
         e.preventDefault();

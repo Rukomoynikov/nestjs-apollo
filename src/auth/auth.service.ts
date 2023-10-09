@@ -35,7 +35,7 @@ export class AuthService {
     });
 
     if (user) {
-      const isPasswordCorrect = await bcrypt.compareA(
+      const isPasswordCorrect = await bcrypt.compare(
         data.password,
         user.password,
       );

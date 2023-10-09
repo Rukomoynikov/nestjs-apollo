@@ -1,6 +1,8 @@
 import { useQuery } from '@apollo/client';
 import { gql } from '../src/__generated__/';
 import { SignUpForm } from "./components/SignUp.tsx";
+import { SignInForm } from "./components/SignInForm.tsx";
+import { Header } from "./components/Header.tsx";
 
 const GET_ARTICLES = gql(/* GraphQL */ `
     query GetArticles {
@@ -21,7 +23,11 @@ function App() {
 
   return (
     <>
+      <Header />
+      <hr/>
       <SignUpForm />
+      <hr/>
+      <SignInForm />
 
       {data.articles.map((article) => {
         return <div key={article.id}>

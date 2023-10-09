@@ -4,7 +4,6 @@ export const authenticateUserByRequest = (
   authService: AuthService,
   request: Request,
 ) => {
-
   const token =
     request.headers.authorization?.replace('Bearer ', '') ||
     request?.cookies?.jwt ||
