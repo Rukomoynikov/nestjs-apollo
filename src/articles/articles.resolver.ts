@@ -40,7 +40,7 @@ export class ArticlesResolver {
     return this.articlesService.remove(id);
   }
 
-  @Query(() => [Article], {name: 'publishedArticles'})
+  @Query(() => [Article], { name: 'publishedArticles' })
   findAllPublished() {
     return this.articlesService.findAllPublished();
   }

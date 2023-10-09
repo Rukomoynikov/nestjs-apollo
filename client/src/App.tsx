@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { gql } from '../src/__generated__/';
+import { SignUpForm } from "./components/SignUp.tsx";
 
 const GET_ARTICLES = gql(/* GraphQL */ `
     query GetArticles {
@@ -20,6 +21,8 @@ function App() {
 
   return (
     <>
+      <SignUpForm />
+
       {data.articles.map((article) => {
         return <div key={article.id}>
           <h2>{article.title}</h2>
