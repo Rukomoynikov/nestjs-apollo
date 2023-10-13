@@ -4,10 +4,12 @@ import { useQuery } from "@apollo/client";
 
 interface AuthContextType {
   isUserLoaded: boolean,
-  user: { email: string | null }
+  user: {
+    email: string
+  } | null
 }
 
-const AuthContext = createContext<AuthContextType>({isUserLoaded: false, user: {email: null}})
+const AuthContext = createContext<AuthContextType>({isUserLoaded: false, user: null})
 
 type Props = {
   children: JSX.Element | JSX.Element[]
@@ -24,12 +26,12 @@ const GET_ME = gql(/* GraphQL */ `
 
 const AuthProvider: FC<Props> = ({ children }) => {
   const [isUserLoaded, setIsUserLoaded] = useState(false)
-  const [userEmail, setUserEmail] = useState<string | null>(null)
+  const [user, setUser] = useState(null)
 
   useQuery(GET_ME, {
     onCompleted: (data) => {
       setIsUserLoaded(true)
-      setUserEmail(data.me.email)
+      setUser({ ...data.me })
     },
     onError: () => {
       setIsUserLoaded(true)
@@ -41,7 +43,7 @@ const AuthProvider: FC<Props> = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{isUserLoaded: isUserLoaded, user: { email: userEmail }}}>
+    <AuthContext.Provider value={{isUserLoaded: isUserLoaded, user: user}}>
       {children}
     </AuthContext.Provider>
   );

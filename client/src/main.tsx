@@ -4,6 +4,7 @@ import { AuthProvider} from "./providers/auth.provider.tsx";
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { router } from "./router";
 import { RouterProvider } from "react-router-dom";
+import "./index.css"
 
 const client = new ApolloClient({
   uri: '/graphql',

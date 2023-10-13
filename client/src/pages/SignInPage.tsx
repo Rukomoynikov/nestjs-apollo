@@ -1,7 +1,13 @@
 import { SignInForm } from "../components/SignInForm.tsx";
+import { Link } from "react-router-dom";
 
 export const SignInPage = () => {
-  return <>
-    <SignInForm />
-  </>
+  return (
+    <>
+      <Link to="/users/sign_up">Create an account
+      </Link>
+      
+      <SignInForm />
+    </>
+  )
 }

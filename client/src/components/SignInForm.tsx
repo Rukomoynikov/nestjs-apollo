@@ -33,9 +33,9 @@ export const SignInForm = () => {
 
 
   return <>
-    <h4>
+    <h1>
       {formState.login ? 'Login' : 'Sign Up'}
-    </h4>
+    </h1>
 
     <form
       onSubmit={e => {
