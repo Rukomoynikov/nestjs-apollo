@@ -6,13 +6,6 @@ const config: CodegenConfig = {
   generates: {
     '../client/src/__generated__/': {
       preset: 'client',
-      plugins: [],
-      config: {
-        skipTypename: false,
-        withHooks: true,
-        withHOC: false,
-        withComponent: false,
-      },
       presetConfig: {
         gqlTagName: 'gql',
       },
