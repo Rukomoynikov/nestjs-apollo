@@ -1,7 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import '@radix-ui/themes/styles.css';
-import { Theme } from '@radix-ui/themes';
 import { AuthProvider} from "./providers/auth.provider.tsx";
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { router } from "./router";
@@ -14,12 +12,10 @@ const client = new ApolloClient({
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Theme>
-      <ApolloProvider client={client}>
-        <AuthProvider>
-          <RouterProvider router={router} />
-        </AuthProvider>
-      </ApolloProvider>
-    </Theme>
+    <ApolloProvider client={client}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </ApolloProvider>
   </React.StrictMode>,
 )
