@@ -2,6 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type UserModel {
+  id: ID!
+  email: String!
+  status: String!
+}
+
 type Article {
   id: Int!
   title: String!
@@ -10,18 +16,13 @@ type Article {
   published: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
+  author: UserModel!
 }
 
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
-
-type UserModel {
-  id: ID!
-  email: String!
-  status: String!
-}
 
 type Query {
   allUsers: [UserModel!]!

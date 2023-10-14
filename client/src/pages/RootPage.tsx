@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/client";
 import { GetArticlesQuery } from "../__generated__/graphql.ts";
 import { gql } from "../__generated__";
 import { Header } from "../components/Header.tsx";
+import { NewArticleForm } from "../components/NewArticleForm.tsx";
 
 export const RootPage = () => {
   const GET_ARTICLES = gql(/* GraphQL */ `
@@ -29,6 +30,7 @@ export const RootPage = () => {
 
   return <>
     <Header />
+    <NewArticleForm />
     {articlesList}
   </>
 }

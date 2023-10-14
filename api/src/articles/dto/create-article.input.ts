@@ -13,4 +13,6 @@ export class CreateArticleInput {
 
   @Field(() => String, { description: 'Example field (placeholder)' })
   published?: boolean = false;
+
+  authorId: number;
 }

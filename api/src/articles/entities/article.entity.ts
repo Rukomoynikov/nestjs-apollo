@@ -1,4 +1,5 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { UserModel } from '../../auth/user.model';
 
 @ObjectType()
 export class Article {
@@ -22,4 +23,7 @@ export class Article {
 
   @Field(() => Date)
   updatedAt: Date;
+
+  @Field(() => UserModel)
+  author: UserModel;
 }
