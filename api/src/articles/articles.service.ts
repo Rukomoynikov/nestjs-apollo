@@ -12,7 +12,10 @@ export class ArticlesService {
   }
 
   findAll() {
-    return this.prisma.article.findMany();
+    return this.prisma.article.findMany({
+      include: { author: true },
+      orderBy: { createdAt: 'desc' },
+    });
   }
 
   findOne(id: number) {
