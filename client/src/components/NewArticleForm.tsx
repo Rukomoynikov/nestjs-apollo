@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export const NewArticleForm = () => {
   const navigate = useNavigate();
-  
+
   const [formState, setFormState] = useState({
     title: '',
     body: '',
