@@ -31,7 +31,6 @@ export const SignInForm = () => {
     }
   });
 
-
   return <>
     <h1>
       {formState.login ? 'Login' : 'Sign Up'}

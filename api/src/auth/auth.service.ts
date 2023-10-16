@@ -22,7 +22,7 @@ export class AuthService {
 
     return this.prisma.user.create({
       data: {
-        email: data.email,
+        ...data,
         password,
         status: 'user',
       },

@@ -10,9 +10,18 @@ export class UserModel {
   @Field(() => ID)
   id: number;
 
+  @Field({ nullable: true })
+  name: string;
+
   @Field()
   email: string;
 
-  @Field()
+  @Field({ defaultValue: 'user' })
   status: UserStatus;
+
+  @Field()
+  createdAt: Date;
+
+  @Field()
+  updatedAt: Date;
 }
