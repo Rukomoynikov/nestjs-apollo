@@ -1,54 +1,61 @@
-import { createContext, FC, useState } from "react";
+// https://raw.githubusercontent.com/Rukomoynikov/codemetrics_el/aaa3c30478d2751697d040ede689974c5f97e67a/client/src/providers/auth_provider.tsx?token=GHSAT0AAAAAAB7THNBUMHHQTUQWRI4YGNUQZJQGC7A
+// https://github.com/Rukomoynikov/codemetrics_el/commit/aaa3c30478d2751697d040ede689974c5f97e67a#diff-d53fd92baf801e02f9d3c5330c9cac6950f88e439d97ea64347b6cb50b186477
+
+import React, { createContext, useState, type Dispatch } from 'react'
 import { gql } from "../__generated__";
 import { useQuery } from "@apollo/client";
 
-interface AuthContextType {
-  isUserLoaded: boolean,
-  user: {
-    email: string
-  } | null
+interface AuthenticatedState {
+  isAuthenticated: true
+  email: string
 }
 
-const AuthContext = createContext<AuthContextType>({isUserLoaded: false, user: null})
-
-type Props = {
-  children: JSX.Element | JSX.Element[]
+interface NonAuthenticatedState {
+  isAuthenticated: false
 }
 
-const GET_ME = gql(/* GraphQL */ `
-    query GetMe {
-        me {
-            email
-        }
-    }
-`);
+const AuthContext = createContext<AuthenticatedState | NonAuthenticatedState>({ isAuthenticated: false })
+const AuthDispatchContext = createContext<Dispatch<AuthenticatedState | NonAuthenticatedState>>(() => {})
 
+interface Props {
+  children: string | JSX.Element | JSX.Element[]
+}
 
-const AuthProvider: FC<Props> = ({ children }) => {
-  const [isUserLoaded, setIsUserLoaded] = useState(false)
-  const [user, setUser] = useState(null)
+const defaultAuthState: NonAuthenticatedState = {
+  isAuthenticated: false
+}
+
+const AuthProvider: React.FunctionComponent<Props> = ({ children }) => {
+  const GET_ME = gql(/* GraphQL */ `
+      query GetMe {
+          me {
+              email
+          }
+      }
+  `);
+
+  const [user, setUser] = useState<AuthenticatedState | NonAuthenticatedState>(defaultAuthState)
+  const [loaded, setLoaded] = useState(false)
 
   useQuery(GET_ME, {
     onCompleted: (data) => {
-      setIsUserLoaded(true)
-      setUser({ ...data.me })
+      setLoaded(true)
+      setUser({ ...data.me, isAuthenticated: true })
     },
     onError: () => {
-      setIsUserLoaded(true)
+      setLoaded(true)
     }
   })
 
-  if(!isUserLoaded) {
-    return <></>
-  }
-
   return (
-    <AuthContext.Provider value={{isUserLoaded: isUserLoaded, user: user}}>
-      {children}
+    <AuthContext.Provider value={user}>
+      <AuthDispatchContext.Provider value={setUser}>
+        { loaded && children }
+      </AuthDispatchContext.Provider>
     </AuthContext.Provider>
-  );
+  )
 }
 
-export { AuthProvider, AuthContext };
+export { AuthProvider, AuthContext, AuthDispatchContext }
 
 

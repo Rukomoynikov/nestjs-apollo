@@ -1,9 +1,14 @@
 import { gql } from "../__generated__";
 import { useMutation } from "@apollo/client";
-import { useState } from "react";
+import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Article } from "../__generated__/graphql.ts";
 
-export const NewArticleForm = () => {
+interface Props {
+  setArticles: (article: Article) => void
+}
+
+export const NewArticleForm: FC<Props> = ({setArticles}) => {
   const navigate = useNavigate();
 
   const [formState, setFormState] = useState({
@@ -18,14 +23,19 @@ export const NewArticleForm = () => {
                             id
                             body
                             title
-                            description   
+                            description
+              author {
+                  email
+                  id
+              }
           }
       }
   `);
 
   const [submitArticle] = useMutation(CREATE_ARTICLE, {
     variables: { body: formState.body, title: formState.title, description: formState.description },
-    onCompleted: () => {
+    onCompleted: (data: {createArticle: Article}) => {
+      setArticles({...data.createArticle})
       setFormState({ title: '', body: '', description: '' });
       navigate("/");
     }

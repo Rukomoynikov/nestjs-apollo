@@ -8,7 +8,10 @@ export class ArticlesService {
   constructor(private prisma: PrismaService) {}
 
   create(createArticleInput: CreateArticleInput) {
-    return this.prisma.article.create({ data: createArticleInput });
+    return this.prisma.article.create({
+      data: createArticleInput,
+      include: { author: true },
+    });
   }
 
   findAll() {

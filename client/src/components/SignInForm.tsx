@@ -2,11 +2,13 @@
 
 import { gql } from "../__generated__";
 import { useMutation } from "@apollo/client";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthDispatchContext } from '../providers/auth.provider'
 
 export const SignInForm = () => {
   const navigate = useNavigate();
+  const setUser = useContext(AuthDispatchContext)
 
   const [formState, setFormState] = useState({
     login: true,
@@ -26,7 +28,8 @@ export const SignInForm = () => {
 
   const [login] = useMutation(SIGN_IN, {
     variables: { email: formState.email, password: formState.password },
-    onCompleted: () => {
+    onCompleted: (data) => {
+      setUser({ ...data.signIn, isAuthenticated: true })
       navigate("/");
     }
   });
