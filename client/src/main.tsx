@@ -6,6 +6,9 @@ import { router } from "./router";
 import { RouterProvider } from "react-router-dom";
 import "./index.css"
 
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/500.css';
+
 const client = new ApolloClient({
   uri: '/graphql',
   cache: new InMemoryCache(),
