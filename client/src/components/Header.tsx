@@ -1,4 +1,5 @@
 import { AuthContext } from "../providers/auth.provider.tsx";
+import { buttonVariants } from "../components/ui/button.tsx"
 import { useContext} from "react";
 import { Link } from "react-router-dom";
 
@@ -10,12 +11,19 @@ export const Header = () => {
       <h1>{user.email}</h1>
     </>
     : <>
-      <Link to={"/users/sign_in"}>SignIn</Link>
-      <Link to={"/users/sign_up"}>SignUp</Link>
+      <div className={'flex gap-x-1.5'}>
+        <Link className={buttonVariants({ variant: "outline" })} to={"/users/sign_in"}>SignIn</Link>
+        <Link className={buttonVariants({ variant: "outline" })} to={"/users/sign_up"}>SignUp</Link>
+      </div>
       </>
 
   return <>
-    {menu}
+    <div className={'flex items-center justify-between space-y-2'}>
+      <div className={'text-3xl font-bold tracking-tight'}>
+        MeetMe
+      </div>
+      {menu}
+    </div>
   </>
 }
 
