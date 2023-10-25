@@ -47,11 +47,13 @@ export const RootPage = () => {
   }
 
   return <>
-    <Header />
-    {user.isAuthenticated && <NewArticleForm setArticles={addArticle} />}
-    <div>
-      <h1>Articles</h1>
-      {articlesList}
+    <div className={'antialiased container'}>
+      <Header />
+      {user.isAuthenticated && <NewArticleForm setArticles={addArticle} />}
+      <div>
+        <h1>Articles</h1>
+        {articlesList}
+      </div>
     </div>
   </>
 }
