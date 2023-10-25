@@ -1,6 +1,8 @@
 import { gql } from "../__generated__";
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
+import { Input } from "../components/ui/input"
+import { Button } from "../components/ui/button.tsx"
 
 export const SignUpForm = () => {
   const SIGN_UP = gql(/* GraphQL */ `
@@ -33,11 +35,29 @@ export const SignUpForm = () => {
         mutateFunction({ variables: { email: email, password: password, name: name } });
       }}
     >
-      <input value={name} onChange={e => setName(e.target.value)} />
-      <input value={email} onChange={e => setEmail(e.target.value)} />
-      <input value={password} onChange={e => setPassword(e.target.value)} />
 
-      <button type="submit">Add Todo</button>
+      <Input
+        value={name}
+        onChange={e => setName(e.target.value)}
+        type="text"
+        placeholder="Name"
+      />
+
+      <Input
+        value={name}
+        onChange={e => setEmail(e.target.value)}
+        type="email"
+        placeholder="Email"
+      />
+
+      <Input
+        value={name}
+        onChange={e => setPassword(e.target.value)}
+        type="password"
+        placeholder="Password"
+      />
+
+      <Button type="submit">Sign up</Button>
     </form>
   </>
 }
